@@ -31,6 +31,9 @@ height: 100
 name: kotlin
 ```
 
+<!-- - Here's some arbitrary syntax -->
+<!-- - Assume it is the format of some runtime configuration we are asked to apply to our project, how would we approach parsing this? -->
+
 <!-- footer: "**Konrad Biernacki**, 2023" -->
 
 ---
@@ -68,7 +71,7 @@ fun parse(input: String): List<Pair<String, String>> {
 
 <!-- - Naïve -->
 <!-- - Efficient -->
-<!-- - Low maintainability -->
+<!-- - Prohibitively expensive to maintain -->
 
 ---
 
@@ -85,7 +88,9 @@ fun parse(input: String): List<Pair<String, String>> {
 }
 ```
 
-<!-- - Higher maintainability -->
+<!-- - Simpler to understand -->
+<!-- - Improved maintainability -->
+<!-- - Regular Expressions may not be universally understood -->
 
 ---
 
@@ -105,6 +110,8 @@ fun parse(input: String): List<Pair<String, String>> {
 ```
 
 <!-- - Extremely simple -->
+<!-- - Trivial to debug -->
+<!-- - The issue of maintainability still exists -->
 
 ---
 
@@ -115,8 +122,12 @@ pre { font-size: 56px; }
 ```diff
 -   height: 100
 +   height: 100.5
++   ratio: 16:9
     name: kotlin
 ```
+
+<!-- - Certain implementations may choke on the non-alphanumeric character or reappearance of the separator -->
+<!-- - Values may be more meaningful than a simple string, what about treating them as different data types? (i.e. decimal, etc.) -->
 
 ---
 
@@ -126,10 +137,13 @@ pre { font-size: 56px; }
 
 ```diff
     height: 100.5
+    ratio: 16:9
 -   name: kotlin
 +   name: kotlin;
 ```
 
+<!-- - Syntax flexibility -->
+
 ---
 
 <style scoped>
@@ -138,9 +152,12 @@ pre { font-size: 56px; }
 
 ```diff
     height: 100.5
+    ratio: 16:9
     name: kotlin;
 +   role : admin
 ```
+
+<!-- - Syntax flexibility cont. -->
 
 # ...
 
@@ -188,6 +205,10 @@ val configParser = zeroOrMore(
 
 configParser(input)
 ```
+
+<!-- - Six parsers seen here -->
+<!-- - Demonstrates composition -->
+<!-- - We're going to learn how to write a working version of this -->
 
 ---
 

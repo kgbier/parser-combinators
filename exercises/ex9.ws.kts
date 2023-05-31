@@ -168,12 +168,18 @@ val keyValueRow = zip(
 val configParser = zeroOrMore(keyValueRow)
 
 val config = """
-targetHeight: 100
-maxTemperature: 80
-id : 16
+targetHeight   : 100
+maxTemperature : 80
+id             : 16 
+
+invalid syntax
+
+ratio          : 451 
 """.trimIndent()
 
-configParser(config)
+configParser(config)?.forEach {
+    println(it)
+}
 
 
 

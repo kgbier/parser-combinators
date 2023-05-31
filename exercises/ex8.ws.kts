@@ -86,7 +86,7 @@ val value = oneOrMore(int).map { it.joinToString("").toInt() }
 fun literal(char: Char) = Parser { input ->
     input.wrapped.firstOrNull()
         ?.takeIf { it == char }
-        ?.let { input.advance() }
+        ?.also { input.advance() }
 }
 
 
@@ -100,22 +100,22 @@ fun literal(char: Char) = Parser { input ->
 
 
 
+val whitesquare = literal('⬜')
+
+whitesquare("Hello⬜Kotlin")
+whitesquare("⬜Kotlin")
+whitesquare("Hello⬜")
+
+
+
+
+
+
+
+
+
+
 val whitespace = literal(' ')
-
-whitespace("Hello Kotlin") == Unit
-whitespace(" Kotlin") == Unit
-whitespace("Hello ") == Unit
-
-
-
-
-
-
-
-
-
-
-
 
 val separator = zip(
     literal(':'),
@@ -126,6 +126,7 @@ separator(" ") == Unit
 separator("Hello Kotlin") == Unit
 separator(":") == Unit
 separator(": ") == Unit
+separator(":   ") == Unit
 
 
 
