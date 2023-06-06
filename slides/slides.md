@@ -352,6 +352,8 @@ fun <A, B> Parser<A>.flatMap(
 ): Parser<B>
 ```
 
+<!-- - `flatMap` permits the output of a successfully executed parser to be transformed into another successful parser, or a failed parser -->
+
 ---
 
 <style scoped>
@@ -365,6 +367,10 @@ fun <Output> never(): Parser<Output>
 
 fun <Output> maybe(parser: Parser<Output>): Parser<Maybe<Output>>
 ```
+
+<!-- - These parsers are useful when flat-mapping -->
+<!-- - You may imagine an instance when, based on some parser's output, you may switch on some complex logic to either succeed or fail -->
+<!-- - The `maybe` parser is one such parser that successfully completes, but may require more behaviour built off it to interpret its outcome -->
 
 ---
 
@@ -384,6 +390,9 @@ fun <Output, SeparatedBy> oneOrMore(
 ): Parser<List<Output>>
 ```
 
+<!-- - Very often I found myself writing `zeroOrMore` and `oneOrMore` parsers with separators in mind -->
+<!-- - Here's an example of supporting that use-case in the API for these parsers -->
+
 ---
 
 <style scoped>
@@ -396,6 +405,9 @@ fun <Output> notOneOf(parsers: List<Parser<Output>>): Parser<Unit>
 
 fun prefix(predicate: (Char) -> Boolean): Parser<String>
 ```
+
+<!-- - `oneOf` and `notOneOf` accept a list of parsers and considers itself successful on the first matching parser -->
+<!-- - `prefix` is an ergonomic parser-builder which parses while a given predicate returns true. Similar to a `takeWhile` -->
 
 ---
 
