@@ -170,14 +170,32 @@ val configParser = zeroOrMore(keyValueRow)
 val config = """
 targetHeight   : 100
 maxTemperature : 80
-id             : 16 
-
-invalid syntax
-
-ratio          : 451 
+id             : 16
 """.trimIndent()
 
 configParser(config)?.forEach {
+    println(it)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+val configWithError = """
+targetHeight   : 100
+maxTemperature : 80
+# Unparseable
+id             : 16 
+""".trimIndent()
+
+configParser(configWithError)?.forEach {
     println(it)
 }
 
